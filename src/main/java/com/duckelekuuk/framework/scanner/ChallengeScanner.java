@@ -1,7 +1,8 @@
 package com.duckelekuuk.framework.scanner;
 
-import com.duckelekuuk.framework.annotations.AOCInput;
+import com.duckelekuuk.framework.AOCChallenge;
 import com.duckelekuuk.framework.annotations.AOCDay;
+import com.duckelekuuk.framework.annotations.AOCInput;
 import com.duckelekuuk.framework.annotations.AOCPartOne;
 import com.duckelekuuk.framework.annotations.AOCPartTwo;
 import lombok.extern.log4j.Log4j2;

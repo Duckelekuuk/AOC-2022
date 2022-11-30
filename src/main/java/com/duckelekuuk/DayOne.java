@@ -1,7 +1,7 @@
 package com.duckelekuuk;
 
-import com.duckelekuuk.framework.annotations.AOCInput;
 import com.duckelekuuk.framework.annotations.AOCDay;
+import com.duckelekuuk.framework.annotations.AOCInput;
 import com.duckelekuuk.framework.annotations.AOCPartOne;
 import com.duckelekuuk.framework.annotations.AOCPartTwo;
 

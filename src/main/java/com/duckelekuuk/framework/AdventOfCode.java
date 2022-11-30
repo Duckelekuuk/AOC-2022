@@ -1,8 +1,7 @@
 package com.duckelekuuk.framework;
 
-import com.duckelekuuk.framework.cli.ArgumentOptions;
-import com.duckelekuuk.framework.scanner.AOCChallenge;
 import com.duckelekuuk.framework.annotations.AOCProject;
+import com.duckelekuuk.framework.cli.ArgumentOptions;
 import com.duckelekuuk.framework.scanner.ChallengeScanner;
 import com.duckelekuuk.framework.utils.InputFetcher;
 import lombok.extern.log4j.Log4j2;
@@ -62,8 +61,11 @@ public class AdventOfCode {
         AOCChallenge challenge = challengeScanner.constructChallenge(day);
         challenge.setInput(input);
 
-        log.info("Output part 1: {}", challenge.runPartOne());
+        String resultPartOne = challenge.runPartOne();
         challenge.resetInput();
-        log.info("Output part 2: {}", challenge.runPartTwo());
+        String resultPartTwo = challenge.runPartTwo();
+
+        log.info("Part 1: {}", resultPartOne);
+        log.info("Part 2: {}", resultPartTwo);
     }
 }

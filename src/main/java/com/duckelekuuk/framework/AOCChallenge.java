@@ -1,4 +1,4 @@
-package com.duckelekuuk.framework.scanner;
+package com.duckelekuuk.framework;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
