@@ -1,8 +1,8 @@
 package com.duckelekuuk.framework;
 
 import com.duckelekuuk.framework.cli.ArgumentOptions;
-import com.duckelekuuk.framework.scanner.AOCProject;
-import com.duckelekuuk.framework.scanner.AbstractChallenge;
+import com.duckelekuuk.framework.scanner.AOCChallenge;
+import com.duckelekuuk.framework.annotations.AOCProject;
 import com.duckelekuuk.framework.scanner.ChallengeScanner;
 import com.duckelekuuk.framework.utils.InputFetcher;
 import lombok.extern.log4j.Log4j2;
@@ -18,7 +18,6 @@ public class AdventOfCode {
     }
 
     public static void start(Class<?> mainClass, String[] args) throws Exception {
-        System.out.println("Advent of Code 2021");
         ArgumentOptions argumentOptions = new ArgumentOptions(args);
 
         Calendar instance = Calendar.getInstance(TimeZone.getDefault());
@@ -41,7 +40,6 @@ public class AdventOfCode {
 
         log.info("Starting Advent of Code {} Day {}", year, day);
 
-
         String session;
 
         if (argumentOptions.containsKey("session")) {
@@ -60,13 +58,12 @@ public class AdventOfCode {
         // Scan for challenges
         ChallengeScanner challengeScanner = new ChallengeScanner(mainClass);
         challengeScanner.scan();
-        AbstractChallenge challenge = challengeScanner.constructChallenge(day, input);
 
-        String resultPart1 = challenge.getPart1();
-        challenge.reset();
-        String resultPart2 = challenge.getPart2();
+        AOCChallenge challenge = challengeScanner.constructChallenge(day);
+        challenge.setInput(input);
 
-        log.info("Result part 1: {}", resultPart1);
-        log.info("Result part 2: {}", resultPart2);
+        log.info("Output part 1: {}", challenge.runPartOne());
+        challenge.resetInput();
+        log.info("Output part 2: {}", challenge.runPartTwo());
     }
 }

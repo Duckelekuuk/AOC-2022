@@ -1,20 +1,21 @@
 package com.duckelekuuk;
 
-import com.duckelekuuk.framework.scanner.AOCDay;
-import com.duckelekuuk.framework.scanner.AbstractChallenge;
+import com.duckelekuuk.framework.annotations.AOCInput;
+import com.duckelekuuk.framework.annotations.AOCDay;
+import com.duckelekuuk.framework.annotations.AOCPartOne;
+import com.duckelekuuk.framework.annotations.AOCPartTwo;
 
 import java.util.List;
 
 @AOCDay(day = 1)
-public class DayOne extends AbstractChallenge {
+public class DayOne {
 
-    public DayOne(List<String> input) {
-        super(input);
-    }
+    @AOCInput
+    private List<String> input;
 
-    @Override
+    @AOCPartOne
     public String getPart1() {
-        List<Integer> integers = getInput().stream().mapToInt(Integer::parseInt).boxed().toList();
+        List<Integer> integers = input.stream().mapToInt(Integer::parseInt).boxed().toList();
         int previous = integers.get(0);
         int increased = 0;
 
@@ -31,9 +32,9 @@ public class DayOne extends AbstractChallenge {
 
     }
 
-    @Override
+    @AOCPartTwo
     public String getPart2() {
-        List<Integer> integers = getInput().stream().mapToInt(Integer::parseInt).boxed().toList();
+        List<Integer> integers = input.stream().mapToInt(Integer::parseInt).boxed().toList();
         int previousSum = 100000000;
         int increased = 0;
         for (int i = 0; i < integers.size(); i++) {

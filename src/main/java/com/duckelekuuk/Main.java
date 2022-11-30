@@ -1,7 +1,7 @@
 package com.duckelekuuk;
 
 import com.duckelekuuk.framework.AdventOfCode;
-import com.duckelekuuk.framework.scanner.AOCProject;
+import com.duckelekuuk.framework.annotations.AOCProject;
 
 @AOCProject(year = 2021)
 public class Main {

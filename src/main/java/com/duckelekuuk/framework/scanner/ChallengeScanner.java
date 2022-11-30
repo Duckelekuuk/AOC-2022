@@ -1,11 +1,17 @@
 package com.duckelekuuk.framework.scanner;
 
+import com.duckelekuuk.framework.annotations.AOCInput;
+import com.duckelekuuk.framework.annotations.AOCDay;
+import com.duckelekuuk.framework.annotations.AOCPartOne;
+import com.duckelekuuk.framework.annotations.AOCPartTwo;
 import lombok.extern.log4j.Log4j2;
 import org.reflections.Reflections;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Log4j2
@@ -13,7 +19,7 @@ public class ChallengeScanner {
 
     private final Class<?> startClass;
     private final Reflections reflections;
-    private final Map<Integer, Class<? extends AbstractChallenge>> foundChallenges;
+    private final Map<Integer, Class<?>> foundChallenges;
 
     public ChallengeScanner(Class<?> startClass) {
         this.startClass = startClass;
@@ -22,7 +28,7 @@ public class ChallengeScanner {
     }
 
     public void scan() {
-        reflections.getSubTypesOf(AbstractChallenge.class).forEach(day -> {
+        reflections.getTypesAnnotatedWith(AOCDay.class).forEach(day -> {
             AOCDay annotation = day.getAnnotation(AOCDay.class);
             if (annotation != null) {
                 foundChallenges.put(annotation.day(), day);
@@ -30,16 +36,35 @@ public class ChallengeScanner {
         });
     }
 
-    public AbstractChallenge constructChallenge(int day, List<String> input) throws NoSuchMethodException {
-        Class<? extends AbstractChallenge> challengeClass = foundChallenges.get(day);
+    public AOCChallenge constructChallenge(int day) {
+        Class<?> challengeClass = foundChallenges.get(day);
         if (challengeClass == null) {
             throw new IllegalArgumentException("No challenge found for day " + day);
         }
 
-        Constructor<?> constructor = challengeClass.getConstructor(List.class);
+        Field inputField = null;
+        Method partOneMethod = null;
+        Method partTwoMethod = null;
+
+        Constructor<?> constructor = challengeClass.getConstructors()[0];
         try {
-            return (AbstractChallenge) constructor.newInstance(input);
-        } catch (Exception e) {
+            Object instance = constructor.newInstance();
+            for (Field declaredField : instance.getClass().getDeclaredFields()) {
+                if (declaredField.getDeclaredAnnotation(AOCInput.class) == null) continue;
+                declaredField.setAccessible(true);
+                inputField = declaredField;
+            }
+
+            for (Method declaredMethod : instance.getClass().getDeclaredMethods()) {
+                if (declaredMethod.getDeclaredAnnotation(AOCPartOne.class) != null) {
+                    partOneMethod = declaredMethod;
+                } else if (declaredMethod.getDeclaredAnnotation(AOCPartTwo.class) != null) {
+                    partTwoMethod = declaredMethod;
+                }
+            }
+
+            return new AOCChallenge(instance, partOneMethod, partTwoMethod, inputField);
+        } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
             throw new IllegalStateException("Failed to construct challenge for day " + day, e);
         }
     }
