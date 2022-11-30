@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AOCProject {
 
-    public int year() default 2022;
+    public int year() default -1;
 }

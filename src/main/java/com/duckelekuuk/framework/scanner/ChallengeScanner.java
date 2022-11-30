@@ -64,6 +64,10 @@ public class ChallengeScanner {
                 }
             }
 
+            if (partOneMethod == null) {
+                throw new IllegalStateException("Part one is required");
+            }
+
             return new AOCChallenge(instance, partOneMethod, partTwoMethod, inputField);
         } catch (InvocationTargetException | InstantiationException | IllegalAccessException e) {
             throw new IllegalStateException("Failed to construct challenge for day " + day, e);

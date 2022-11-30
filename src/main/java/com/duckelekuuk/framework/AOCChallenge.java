@@ -11,11 +11,8 @@ public class AOCChallenge {
     private final Object instance;
     private final Method partOne;
     private final Method partTwo;
-
     private final Field inputField;
-
     private List<String> input;
-
 
     public AOCChallenge(Object instance, Method partOne, Method partTwo, Field inputField) {
         this.instance = instance;
@@ -24,11 +21,24 @@ public class AOCChallenge {
         this.inputField = inputField;
 
     }
-
+    /**
+     * Executes part one
+     *
+     * @return Result of part one
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
     public String runPartOne() throws InvocationTargetException, IllegalAccessException {
         return invoke(partOne);
     }
 
+    /**
+     * Executes part two
+     *
+     * @return Result of part two
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     */
     public String runPartTwo() throws InvocationTargetException, IllegalAccessException {
         return invoke(partTwo);
     }
@@ -47,5 +57,9 @@ public class AOCChallenge {
             throw new IllegalStateException("No input field found");
         }
         inputField.set(instance, new ArrayList<>(input));
+    }
+
+    public boolean hasPartTwo() {
+        return partTwo != null;
     }
 }
