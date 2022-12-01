@@ -5,53 +5,34 @@ import com.duckelekuuk.aoc.annotations.AOCInput;
 import com.duckelekuuk.aoc.annotations.AOCPartOne;
 import com.duckelekuuk.aoc.annotations.AOCPartTwo;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
+import java.util.Optional;
 
 @AOCDay(day = 1)
 public class DayOne {
 
     @AOCInput
-    private List<String> input;
+    private String input;
 
     @AOCPartOne
     public String getPart1() {
-        int maxCalories = 0;
-        int currentCalories = 0;
-        for (String line : input) {
-            if (line.isBlank()) {
-                if (currentCalories > maxCalories) {
-                    maxCalories = currentCalories;
-                }
-                currentCalories = 0;
-                continue;
-            }
-            int calories = Integer.parseInt(line);
-            currentCalories += calories;
-        }
-        return String.valueOf(maxCalories);
+        Optional<Integer> max = Arrays.stream(input.split("\n\n"))
+                .mapToInt(s -> Arrays.stream(s.strip().split("\n"))
+                        .mapToInt(Integer::parseInt).sum()
+                ).boxed().max(Comparator.naturalOrder());
+
+        return max.get() + "";
     }
 
     @AOCPartTwo
     public String getPart2() {
-        List<Integer> caloriesList = new ArrayList<>();
-        int currentCalories = 0;
-        for (String line : input) {
-            if (line.isBlank()) {
-                caloriesList.add(currentCalories);
-                currentCalories = 0;
-                continue;
-            }
-            int calories = Integer.parseInt(line);
-            currentCalories += calories;
-        }
+        Optional<Integer> max = Optional.of(Arrays.stream(input.split("\n\n"))
+                .mapToInt(s -> Arrays.stream(s.strip().split("\n"))
+                        .mapToInt(Integer::parseInt).sum()
+                ).boxed().sorted(Collections.reverseOrder()).mapToInt(s -> s).limit(3).sum());
 
-        return String.valueOf(caloriesList
-                .stream()
-                .sorted(Comparator.reverseOrder())
-                .mapToInt(value -> value)
-                .limit(3)
-                .sum());
+        return max.get() + "";
     }
 }
