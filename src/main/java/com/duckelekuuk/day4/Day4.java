@@ -40,10 +40,10 @@ public class Day4 {
             String[] left = split[0].split("-");
             String[] right = split[1].split("-");
 
-            Set<Integer> leftSet = IntStream.range(Integer.parseInt(left[0]), Integer.parseInt(left[1]) + 1).boxed().collect(Collectors.toSet());
-            Set<Integer> rightSet = IntStream.range(Integer.parseInt(right[0]), Integer.parseInt(right[1]) + 1).boxed().collect(Collectors.toSet());
+            Pair<Integer, Integer> from = new Pair<>(Integer.parseInt(left[0]), Integer.parseInt(left[1]));
+            Pair<Integer, Integer> to = new Pair<>(Integer.parseInt(right[0]), Integer.parseInt(right[1]));
 
-            return !Collections.disjoint(leftSet, rightSet);
+            return from.getLeft() <= to.getRight() && from.getRight() >= to.getLeft();
         }).count();
     }
 }
