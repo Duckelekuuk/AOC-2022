@@ -1,4 +1,4 @@
-package com.duckelekuuk.daytwo;
+package com.duckelekuuk.day2;
 
 import com.duckelekuuk.aoc.annotations.AOCDay;
 import com.duckelekuuk.aoc.annotations.AOCInput;
@@ -6,10 +6,9 @@ import com.duckelekuuk.aoc.annotations.AOCPartOne;
 import com.duckelekuuk.aoc.annotations.AOCPartTwo;
 
 import java.util.List;
-import java.util.Map;
 
 @AOCDay(day = 2)
-public class DayTwo {
+public class Day2 {
 
     private final int POINTS_WIN = 6;
     private final int POINTS_DRAW = 3;

@@ -1,4 +1,4 @@
-package com.duckelekuuk.dayone;
+package com.duckelekuuk.day1;
 
 import com.duckelekuuk.aoc.annotations.AOCDay;
 import com.duckelekuuk.aoc.annotations.AOCInput;
@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.Optional;
 
 @AOCDay(day = 1)
-public class DayOne {
+public class Day1 {
 
     @AOCInput
     private String input;

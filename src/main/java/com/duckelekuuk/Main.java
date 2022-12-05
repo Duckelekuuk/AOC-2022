@@ -7,6 +7,8 @@ import com.duckelekuuk.aoc.annotations.AOCProject;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        AdventOfCode.start(Main.class, args);
+        AdventOfCode adventOfCode = new AdventOfCode(Main.class);
+        adventOfCode.setDay(3);
+        adventOfCode.start();
     }
 }
