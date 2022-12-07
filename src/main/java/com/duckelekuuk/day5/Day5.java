@@ -4,6 +4,7 @@ import com.duckelekuuk.aoc.annotations.AOCDay;
 import com.duckelekuuk.aoc.annotations.AOCInput;
 import com.duckelekuuk.aoc.annotations.AOCPartOne;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,6 +18,15 @@ public class Day5 {
     public int getPartOne() {
         CrateParser crateParser = new CrateParser(input);
 
+        for (Instruction instruction : crateParser.getInstructions()) {
+            Collection<Character> currentTower = crateParser.getCrates().get(instruction.getFrom());
+
+            System.out.println("Moving " + instruction.getAmount() + " crates from " + instruction.getFrom() + " to " + instruction.getTo());
+        }
+
+        for (Character character : crateParser.getCrates().get(crateParser.getCrates().size() - 1)) {
+            System.out.println(character);
+        }
         return 0;
     }
 }
