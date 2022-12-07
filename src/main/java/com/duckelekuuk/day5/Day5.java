@@ -19,14 +19,9 @@ public class Day5 {
         CrateParser crateParser = new CrateParser(input);
 
         for (Instruction instruction : crateParser.getInstructions()) {
-            Collection<Character> currentTower = crateParser.getCrates().get(instruction.getFrom());
-
             System.out.println("Moving " + instruction.getAmount() + " crates from " + instruction.getFrom() + " to " + instruction.getTo());
         }
 
-        for (Character character : crateParser.getCrates().get(crateParser.getCrates().size() - 1)) {
-            System.out.println(character);
-        }
         return 0;
     }
 }
