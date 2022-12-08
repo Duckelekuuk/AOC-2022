@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         AdventOfCode adventOfCode = new AdventOfCode(Main.class);
-        adventOfCode.setDay(6);
+        adventOfCode.setDay(7);
         adventOfCode.start();
     }
 }
