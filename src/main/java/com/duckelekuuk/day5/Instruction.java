@@ -1,14 +1,5 @@
 package com.duckelekuuk.day5;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+public record Instruction(int amount, int from, int to) {
 
-
-@Data
-@AllArgsConstructor
-public class Instruction {
-
-    private final int amount;
-    private final int from;
-    private final int to;
 }
